@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "uV6jrfEqdxQ760LjEhkdwDYlb32kk1yVsliTm2Z1trPq2sTyfBUNAXNIQr0Ea4MsQuCJgbLCHh63H65n/MZPSw==",
+  "success": true,
+  "projectFilePath": "/Users/henry/Documents/MAU/ADOApp/ADO/ADOAPI.Application/ADOAPI.Application.csproj",
+  "expectedPackageFiles": [
+    "/Users/henry/.nuget/packages/netstandard.library.ref/2.1.0/netstandard.library.ref.2.1.0.nupkg.sha512"
+  ],
+  "logs": []
+}
