@@ -175,3 +175,24 @@
 2023-06-23 13:39:35.1808 Warn Skipping unrecognized property 'tolower=true` for ${level} (NLog.LayoutRenderers.LevelLayoutRenderer)
 2023-06-23 13:39:35.1820 Info Adding target ConsoleTarget(Name=lifetimeConsole)
 2023-06-23 13:39:35.2284 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=69, FilePath=/Users/henry/Documents/MAU/ADOApp/ADO/ADOAPI/bin/Debug/net7.0/nlog.config
+2023-06-23 13:40:18.7042 Info Message Template Auto Format enabled
+2023-06-23 13:40:18.7225 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-23 13:40:18.7426 Info Adding target FileTarget(Name=allfile)
+2023-06-23 13:40:18.7493 Info Adding target FileTarget(Name=ownFile-web)
+2023-06-23 13:40:18.7498 Warn Skipping unrecognized property 'tolower=true` for ${level} (NLog.LayoutRenderers.LevelLayoutRenderer)
+2023-06-23 13:40:18.7509 Info Adding target ConsoleTarget(Name=lifetimeConsole)
+2023-06-23 13:40:18.8225 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=69, FilePath=/Users/henry/Documents/MAU/ADOApp/ADO/ADOAPI/bin/Debug/net7.0/nlog.config
+2023-06-23 13:41:05.7437 Info Message Template Auto Format enabled
+2023-06-23 13:41:05.7654 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-23 13:41:05.7885 Info Adding target FileTarget(Name=allfile)
+2023-06-23 13:41:05.7957 Info Adding target FileTarget(Name=ownFile-web)
+2023-06-23 13:41:05.7965 Warn Skipping unrecognized property 'tolower=true` for ${level} (NLog.LayoutRenderers.LevelLayoutRenderer)
+2023-06-23 13:41:05.7978 Info Adding target ConsoleTarget(Name=lifetimeConsole)
+2023-06-23 13:41:05.8743 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=69, FilePath=/Users/henry/Documents/MAU/ADOApp/ADO/ADOAPI/bin/Debug/net7.0/nlog.config
+2023-06-23 13:46:12.2701 Info Message Template Auto Format enabled
+2023-06-23 13:46:12.2911 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-23 13:46:12.3153 Info Adding target FileTarget(Name=allfile)
+2023-06-23 13:46:12.3228 Info Adding target FileTarget(Name=ownFile-web)
+2023-06-23 13:46:12.3233 Warn Skipping unrecognized property 'tolower=true` for ${level} (NLog.LayoutRenderers.LevelLayoutRenderer)
+2023-06-23 13:46:12.3244 Info Adding target ConsoleTarget(Name=lifetimeConsole)
+2023-06-23 13:46:12.4193 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=69, FilePath=/Users/henry/Documents/MAU/ADOApp/ADO/ADOAPI/bin/Debug/net7.0/nlog.config

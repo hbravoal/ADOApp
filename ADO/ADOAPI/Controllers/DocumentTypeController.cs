@@ -1,22 +1,17 @@
 using ADOAPI.Domain.Entities.Customer;
 using ADOAPI.Domain.Interfaces.Repository;
 using ADOAPI.Domain.Parameters;
-using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ADOAPI.Controllers
 {
     [Route("api/Clients/[controller]")]
     
-    public class ClientController : ControllerBase
+    public class DocumentTypeController : ControllerBase
     {
-        private readonly IClientRepositoryAsync _repositoryAsync;
+        private readonly IDocumentTypeRepositoryAsync _repositoryAsync;
 
-        public ClientController(IClientRepositoryAsync repositoryAsync)
+        public DocumentTypeController(IDocumentTypeRepositoryAsync repositoryAsync)
         {
             _repositoryAsync = repositoryAsync;
         }
@@ -38,13 +33,13 @@ namespace ADOAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Client model)
+        public async Task<IActionResult> Post([FromBody] DocumentType model)
         {
             return Ok(await _repositoryAsync.AddAsync(model));
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] Client model)
+        public async Task<IActionResult> Put(int id, [FromBody] DocumentType model)
         {
             if (id != model.Id)
             {

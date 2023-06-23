@@ -1,8 +1,6 @@
 using ADOAPI.Domain.Entities.Customer;
 using ADOAPI.Domain.Interfaces.Repository;
 using ADOAPI.Domain.Parameters;
-using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -12,11 +10,11 @@ namespace ADOAPI.Controllers
 {
     [Route("api/Clients/[controller]")]
     
-    public class ClientController : ControllerBase
+    public class GenderController : ControllerBase
     {
-        private readonly IClientRepositoryAsync _repositoryAsync;
+        private readonly IGenderRepositoryAsync _repositoryAsync;
 
-        public ClientController(IClientRepositoryAsync repositoryAsync)
+        public GenderController(IGenderRepositoryAsync repositoryAsync)
         {
             _repositoryAsync = repositoryAsync;
         }
@@ -37,14 +35,24 @@ namespace ADOAPI.Controllers
             return Ok(item);
         }
 
+        /// <summary>
+        /// <example>
+        ///{
+        ///    "active": true,
+        ///    "description": "Male"
+        /// }
+        /// </example>
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Client model)
+        public async Task<IActionResult> Post([FromBody] Gender model)
         {
             return Ok(await _repositoryAsync.AddAsync(model));
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] Client model)
+        public async Task<IActionResult> Put(int id, [FromBody] Gender model)
         {
             if (id != model.Id)
             {
