@@ -6,8 +6,8 @@ using Newtonsoft.Json;
 
 namespace ADOAPI.Domain.Entities.Customer
 {
-    [Table("DocumentType", Schema = nameof(SchemasConfiguration.DocumentType))]
-    public class DocumentType : AuditableBaseEntity
+    [Table("Gender", Schema = nameof(SchemasConfiguration.Gender))]
+    public class Gender : AuditableBaseEntity
     {
         public string Description { get; set; }
         
