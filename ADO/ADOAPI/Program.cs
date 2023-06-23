@@ -1,3 +1,4 @@
+using ADOAPI.Identity.Models;
 using Microsoft.AspNetCore.Identity;
 using NLog.Web;
 using Serilog;
@@ -17,7 +18,29 @@ namespace ADOAPI
                 {
                     var services = scope.ServiceProvider;
                     var loggerFactory = services.GetRequiredService<ILoggerFactory>();
-                  
+                      try
+                    {
+                        var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+                        var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+
+
+                        await ADOAPI.Identity.Seeds.DefaultRoles.SeedAsync(userManager, roleManager);
+                        await ADOAPI.Identity.Seeds.DefaultSuperAdmin.SeedAsync(userManager, roleManager);
+                        await ADOAPI.Identity.Seeds.DefaultBasicUser.SeedAsync(userManager, roleManager);
+
+
+
+                        Log.Information("Finished Seeding Default Data");
+                        Log.Information("Application Starting");
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Warning(ex, "An error occurred seeding the DB");
+                    }
+                    finally
+                    {
+                        Log.CloseAndFlush();
+                    }
                 }
                 host.Run();
             }

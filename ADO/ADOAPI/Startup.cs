@@ -18,16 +18,11 @@ namespace ADOAPI
         }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<IdentityContext>(options =>
-                options.UseSqlServer(
-                    _config.GetConnectionString("IdentityConnection"),
-                    b => b.MigrationsAssembly(typeof(IdentityContext).Assembly.FullName)));
-
+            services.AddSwaggerGen();
             services.AddIdentityInfrastructure(_config);
             services.AddPersistenceInfrastructure(_config);
             services.AddControllers();
             services.AddHealthChecks();
-
 
         }
 
@@ -50,7 +45,11 @@ namespace ADOAPI
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-            
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+                options.RoutePrefix = string.Empty;
+            });
             app.UseHealthChecks("/health");
             
             app.UseEndpoints(endpoints =>
