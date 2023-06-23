@@ -210,3 +210,32 @@
 2023-06-23 13:58:44.0050 Warn Skipping unrecognized property 'tolower=true` for ${level} (NLog.LayoutRenderers.LevelLayoutRenderer)
 2023-06-23 13:58:44.0061 Info Adding target ConsoleTarget(Name=lifetimeConsole)
 2023-06-23 13:58:44.1204 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=69, FilePath=/Users/henry/Documents/MAU/ADOApp/ADO/ADOAPI/bin/Debug/net7.0/nlog.config
+2023-06-23 14:04:15.0651 Info Message Template Auto Format enabled
+2023-06-23 14:04:15.0842 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-23 14:04:15.1055 Info Adding target FileTarget(Name=allfile)
+2023-06-23 14:04:15.1158 Info Adding target FileTarget(Name=ownFile-web)
+2023-06-23 14:04:15.1168 Warn Skipping unrecognized property 'tolower=true` for ${level} (NLog.LayoutRenderers.LevelLayoutRenderer)
+2023-06-23 14:04:15.1181 Info Adding target ConsoleTarget(Name=lifetimeConsole)
+2023-06-23 14:04:15.2260 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=69, FilePath=/Users/henry/Documents/MAU/ADOApp/ADO/ADOAPI/bin/Debug/net7.0/nlog.config
+2023-06-23 14:13:12.1797 Info Message Template Auto Format enabled
+2023-06-23 14:13:12.1921 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-23 14:13:12.2036 Info Adding target FileTarget(Name=allfile)
+2023-06-23 14:13:12.2049 Info Adding target FileTarget(Name=ownFile-web)
+2023-06-23 14:13:12.2049 Warn Skipping unrecognized property 'tolower=true` for ${level} (NLog.LayoutRenderers.LevelLayoutRenderer)
+2023-06-23 14:13:12.2057 Info Adding target ConsoleTarget(Name=lifetimeConsole)
+2023-06-23 14:13:12.2371 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=69, FilePath=/Users/henry/Documents/MAU/ADOApp/ADO/ADOAPI/bin/Debug/net7.0/NLog.config
+2023-06-23 14:13:12.2425 Info Configuration initialized.
+2023-06-23 14:13:12.2430 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.10.13013. Product version: 4.7.10+8142cd035d2c212fd82a4eb0081aed68da713b9e. GlobalAssemblyCache: False
+2023-06-23 14:13:14.0174 Info AppDomain Shutting down. Logger closing...
+2023-06-23 14:13:14.0220 Info Logger has been shut down.
+2023-06-23 14:17:32.0909 Info Message Template Auto Format enabled
+2023-06-23 14:17:32.1031 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-23 14:17:32.1134 Info Adding target FileTarget(Name=allfile)
+2023-06-23 14:17:32.1144 Info Adding target FileTarget(Name=ownFile-web)
+2023-06-23 14:17:32.1147 Warn Skipping unrecognized property 'tolower=true` for ${level} (NLog.LayoutRenderers.LevelLayoutRenderer)
+2023-06-23 14:17:32.1147 Info Adding target ConsoleTarget(Name=lifetimeConsole)
+2023-06-23 14:17:32.1472 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=69, FilePath=/Users/henry/Documents/MAU/ADOApp/ADO/ADOAPI/bin/Debug/net7.0/NLog.config
+2023-06-23 14:17:32.1524 Info Configuration initialized.
+2023-06-23 14:17:32.1527 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.10.13013. Product version: 4.7.10+8142cd035d2c212fd82a4eb0081aed68da713b9e. GlobalAssemblyCache: False
+2023-06-23 14:17:33.3096 Info AppDomain Shutting down. Logger closing...
+2023-06-23 14:17:33.3148 Info Logger has been shut down.
