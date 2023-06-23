@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using ADOAPI.Application.Enums;
-using ADOAPI.Application.Wrappers;
+using ADOAPI.Domain.Enums;
+using ADOAPI.Domain.Wrappers;
 using AutoMapper.Configuration;
 
 namespace ADOAPI.Application.Interfaces

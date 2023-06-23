@@ -2,11 +2,11 @@
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using ADOAPI.Application.DTOs.Account;
-using ADOAPI.Application.Exceptions;
-using ADOAPI.Application.Wrappers;
+using ADOAPI.Domain.DTOs.Account;
+using ADOAPI.Domain.Exceptions;
 using ADOAPI.Domain.Interfaces.Services;
 using ADOAPI.Domain.Settings;
+using ADOAPI.Domain.Wrappers;
 using ADOAPI.Identity.Helpers;
 using ADOAPI.Identity.Models;
 using Microsoft.AspNetCore.Identity;

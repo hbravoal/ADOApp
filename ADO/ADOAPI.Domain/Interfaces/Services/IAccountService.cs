@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
-using ADOAPI.Application.DTOs.Account;
-using ADOAPI.Application.Wrappers;
+using ADOAPI.Domain.DTOs.Account;
+using ADOAPI.Domain.Wrappers;
 
 namespace ADOAPI.Domain.Interfaces.Services
 {

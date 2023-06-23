@@ -1,4 +1,4 @@
-namespace ADOAPI.Application.Exceptions
+namespace ADOAPI.Domain.Exceptions
 {
     public class ErrorDetail
     {

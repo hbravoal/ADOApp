@@ -1,7 +1,7 @@
 ﻿using System.Text;
-using ADOAPI.Application.Wrappers;
 using ADOAPI.Domain.Interfaces.Services;
 using ADOAPI.Domain.Settings;
+using ADOAPI.Domain.Wrappers;
 using ADOAPI.Identity.Contexts;
 using ADOAPI.Identity.Models;
 using ADOAPI.Identity.Services;

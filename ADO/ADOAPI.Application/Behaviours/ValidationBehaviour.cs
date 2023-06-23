@@ -4,7 +4,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation;
 using MediatR;
-using ValidationException = ADOAPI.Application.Exceptions.ValidationException;
 
 namespace ADOAPI.Application.Behaviours
 {

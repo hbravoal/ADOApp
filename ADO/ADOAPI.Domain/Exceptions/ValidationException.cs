@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using ADOAPI.Application.Enums;
+using ADOAPI.Domain.Enums;
 using FluentValidation.Results;
 
-namespace ADOAPI.Application.Exceptions
+namespace ADOAPI.Domain.Exceptions
 {
     public class ValidationException : Exception
     {

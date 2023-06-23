@@ -26,6 +26,7 @@ namespace ADOAPI.Persistence
             #region Repositories
             services.AddTransient(typeof(IGenericRepositoryAsync<>), typeof(GenericRepositoryAsync<>));
             #endregion
+            services.AddTransient<IClientRepositoryAsync, ClientRepositoryAsync>();
 
         }
     }

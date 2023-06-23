@@ -1,4 +1,4 @@
-﻿namespace ADOAPI.Application.DTOs.Account
+﻿namespace ADOAPI.Domain.DTOs.Account
 {
     public class AuthenticationRequest
     {

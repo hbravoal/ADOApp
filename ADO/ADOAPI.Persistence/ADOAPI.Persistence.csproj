@@ -6,11 +6,13 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.6" />
         <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="5.0.0" />
     </ItemGroup>
-    <ItemGroup>
-      <ProjectReference Include="..\ADOAPI.Domain\ADOAPI.Domain.csproj" />
-    </ItemGroup>
+   
     <ItemGroup>
       <Folder Include="Seeds\" />
+    </ItemGroup>
+   
+    <ItemGroup>
+      <ProjectReference Include="..\ADOAPI.Domain\ADOAPI.Domain.csproj" />
     </ItemGroup>
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>

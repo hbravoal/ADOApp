@@ -1,4 +1,4 @@
-﻿namespace ADOAPI.Application.Enums
+﻿namespace ADOAPI.Domain.Enums
 {
     public enum AuthenticationModule
     {

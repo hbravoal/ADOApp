@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
-namespace ADOAPI.Application.DTOs.Account
+namespace ADOAPI.Domain.DTOs.Account
 {
     public class AuthenticationResponse
     {

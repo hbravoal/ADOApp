@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using ADOAPI.Application.Exceptions;
+using ADOAPI.Domain.Exceptions;
 
-namespace ADOAPI.Application.Wrappers
+namespace ADOAPI.Domain.Wrappers
 {
     public class Response<T>
     {

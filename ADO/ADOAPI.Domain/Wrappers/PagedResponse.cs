@@ -1,4 +1,4 @@
-﻿namespace ADOAPI.Application.Wrappers
+﻿namespace ADOAPI.Domain.Wrappers
 {
     public class PagedResponse<T> : Response<T>
     {

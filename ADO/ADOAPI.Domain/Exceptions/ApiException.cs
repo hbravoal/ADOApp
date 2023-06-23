@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace ADOAPI.Application.Exceptions
+namespace ADOAPI.Domain.Exceptions
 {
     public class ApiException : Exception
     {

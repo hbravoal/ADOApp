@@ -6,12 +6,11 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="FluentValidation" Version="10.1.0" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
       <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
     </ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\ADOAPI.Application\ADOAPI.Application.csproj" />
-    </ItemGroup>
+
 
 </Project>

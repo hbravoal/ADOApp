@@ -26,4 +26,5 @@
     <ItemGroup>
       <ProjectReference Include="..\ADOAPI.Domain\ADOAPI.Domain.csproj" />
     </ItemGroup>
+  
 </Project>

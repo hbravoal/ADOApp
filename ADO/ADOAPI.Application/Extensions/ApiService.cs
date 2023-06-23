@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using ADOAPI.Application.Enums;
 using ADOAPI.Application.Interfaces;
-using ADOAPI.Application.Wrappers;
+using ADOAPI.Domain.Enums;
+using ADOAPI.Domain.Wrappers;
 using AutoMapper.Configuration;
 using Newtonsoft.Json;
 

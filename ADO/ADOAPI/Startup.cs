@@ -1,9 +1,6 @@
-using System.Security.Cryptography.X509Certificates;
+using ADOAPI.Application;
 using ADOAPI.Identity;
-using ADOAPI.Identity.Contexts;
 using ADOAPI.Persistence;
-using Microsoft.AspNetCore.DataProtection;
-using Microsoft.EntityFrameworkCore;
 
 namespace ADOAPI
 {
@@ -21,6 +18,8 @@ namespace ADOAPI
             services.AddSwaggerGen();
             services.AddIdentityInfrastructure(_config);
             services.AddPersistenceInfrastructure(_config);
+            services.AddApplicationLayer();
+            
             services.AddControllers();
             services.AddHealthChecks();
 
