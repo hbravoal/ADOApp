@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "/Users/henry/Documents/MAU/ADOApp/ADO/ADOAPI.Persistence/ADOAPI.Persistence.csproj": {}
+    "/Users/henry/Documents/MAU/ADOApp/ADO/ADOAPI.Identity/ADOAPI.Identity.csproj": {}
   },
   "projects": {
     "/Users/henry/Documents/MAU/ADOApp/ADO/ADOAPI.Application/ADOAPI.Application.csproj": {
@@ -192,28 +192,28 @@
         }
       }
     },
-    "/Users/henry/Documents/MAU/ADOApp/ADO/ADOAPI.Persistence/ADOAPI.Persistence.csproj": {
+    "/Users/henry/Documents/MAU/ADOApp/ADO/ADOAPI.Identity/ADOAPI.Identity.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/henry/Documents/MAU/ADOApp/ADO/ADOAPI.Persistence/ADOAPI.Persistence.csproj",
-        "projectName": "ADOAPI.Persistence",
-        "projectPath": "/Users/henry/Documents/MAU/ADOApp/ADO/ADOAPI.Persistence/ADOAPI.Persistence.csproj",
+        "projectUniqueName": "/Users/henry/Documents/MAU/ADOApp/ADO/ADOAPI.Identity/ADOAPI.Identity.csproj",
+        "projectName": "ADOAPI.Identity",
+        "projectPath": "/Users/henry/Documents/MAU/ADOApp/ADO/ADOAPI.Identity/ADOAPI.Identity.csproj",
         "packagesPath": "/Users/henry/.nuget/packages/",
-        "outputPath": "/Users/henry/Documents/MAU/ADOApp/ADO/ADOAPI.Persistence/obj/",
+        "outputPath": "/Users/henry/Documents/MAU/ADOApp/ADO/ADOAPI.Identity/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/henry/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "netstandard2.1"
+          "net6.0"
         ],
         "sources": {
           "/usr/local/share/dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netstandard2.1": {
-            "targetAlias": "netstandard2.1",
+          "net6.0": {
+            "targetAlias": "net6.0",
             "projectReferences": {
               "/Users/henry/Documents/MAU/ADOApp/ADO/ADOAPI.Domain/ADOAPI.Domain.csproj": {
                 "projectPath": "/Users/henry/Documents/MAU/ADOApp/ADO/ADOAPI.Domain/ADOAPI.Domain.csproj"
@@ -228,14 +228,18 @@
         }
       },
       "frameworks": {
-        "netstandard2.1": {
-          "targetAlias": "netstandard2.1",
+        "net6.0": {
+          "targetAlias": "net6.0",
           "dependencies": {
-            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[5.0.6, )"
             },
-            "Microsoft.EntityFrameworkCore": {
+            "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.6, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.6, )"
             },
@@ -247,9 +251,27 @@
               "target": "Package",
               "version": "[5.0.6, )"
             },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.6, )"
+            },
             "Microsoft.Extensions.Options.ConfigurationExtensions": {
               "target": "Package",
               "version": "[5.0.0, )"
+            },
+            "MimeKit": {
+              "target": "Package",
+              "version": "[2.12.0, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[6.11.1, )"
+            },
+            "microsoft.extensions.dependencyinjection": {
+              "target": "Package",
+              "version": "[5.0.1, )"
             }
           },
           "imports": [
@@ -263,14 +285,8 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "NETStandard.Library.Ref",
-              "version": "[2.1.0, 2.1.0]"
-            }
-          ],
           "frameworkReferences": {
-            "NETStandard.Library": {
+            "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
