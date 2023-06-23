@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADOAPI.Application", "ADOAP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADOAPI.Domain", "ADOAPI.Domain\ADOAPI.Domain.csproj", "{720C891A-E459-42C3-8B3C-A8F4D39C4374}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADOAPI.Persistence", "ADOAPI.Persistence\ADOAPI.Persistence.csproj", "{05A3453D-5CB1-4CAE-A592-6325BDEBC72A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{720C891A-E459-42C3-8B3C-A8F4D39C4374}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{720C891A-E459-42C3-8B3C-A8F4D39C4374}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{720C891A-E459-42C3-8B3C-A8F4D39C4374}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05A3453D-5CB1-4CAE-A592-6325BDEBC72A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05A3453D-5CB1-4CAE-A592-6325BDEBC72A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05A3453D-5CB1-4CAE-A592-6325BDEBC72A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05A3453D-5CB1-4CAE-A592-6325BDEBC72A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
