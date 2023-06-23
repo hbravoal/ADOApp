@@ -10,7 +10,6 @@
       <ProjectReference Include="..\ADOAPI.Domain\ADOAPI.Domain.csproj" />
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="Repositories\" />
       <Folder Include="Seeds\" />
     </ItemGroup>
     <PropertyGroup>
