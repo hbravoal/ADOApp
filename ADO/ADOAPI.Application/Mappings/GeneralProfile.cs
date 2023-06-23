@@ -1,4 +1,3 @@
-using ADOAPI.Application.Feature.Queries;
 using ADOAPI.Domain.Entities.Customer;
 using AutoMapper;
 
@@ -11,8 +10,7 @@ namespace ADOAPI.Application.Mappings
 
            
             #region Clients
-            CreateMap<Client, ClientViewModel>().ReverseMap();
-            CreateMap<GetAllClientQuery, GetAllClientParameter>().ReverseMap();;
+            //  CreateMap<Client, ClientViewModel>().ReverseMap();
             #endregion
 
         }

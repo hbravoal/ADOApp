@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using ADOAPI.Domain.Interfaces.Repository;
 using ADOAPI.Persistence.Contexts;
-using ADOAPI.Persistence.Interface;
 using Microsoft.EntityFrameworkCore;
 
 namespace ADOAPI.Persistence.Repositories

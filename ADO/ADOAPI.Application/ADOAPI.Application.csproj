@@ -25,5 +25,11 @@
       <ProjectReference Include="..\ADOAPI.Domain\ADOAPI.Domain.csproj" />
       <ProjectReference Include="..\ADOAPI.Persistence\ADOAPI.Persistence.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Feature\Client\" />
+      <Folder Include="Feature\DocumentType\Queries\" />
+      <Folder Include="Feature\Gender\Queries\" />
+    </ItemGroup>
     
 </Project>

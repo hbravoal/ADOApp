@@ -11,9 +11,13 @@ dotnet tool install --global dotnet-ef
 
 ## Create migration
 /usr/local/share/dotnet/dotnet ef migrations add --project ADOAPI.Identity/ADOAPI.Identity.csproj --startup-project ADOAPI/ADOAPI.csproj --context ADOAPI.Identity.Contexts.IdentityContext --configuration Debug Initial --output-dir Migrations
+/usr/local/share/dotnet/dotnet ef migrations add --project ADOAPI.Persistence/ADOAPI.Persistence.csproj --startup-project ADOAPI/ADOAPI.csproj --context ADOAPI.Persistence.Contexts.ApplicationDbContext --configuration Debug Initial --output-dir Migrations
+
 ## Update database
 
 /usr/local/share/dotnet/dotnet ef database update --project ADOAPI.Identity/ADOAPI.Identity.csproj --startup-project ADOAPI/ADOAPI.csproj --context ADOAPI.Identity.Contexts.IdentityContext --configuration Debug 20230623031435_Initial
+/usr/local/share/dotnet/dotnet ef database update --project ADOAPI.Persistence/ADOAPI.Persistence.csproj --startup-project ADOAPI/ADOAPI.csproj --context ADOAPI.Persistence.Contexts.ApplicationDbContext --configuration Debug 20230623183128_Initial --connection "Data Source=localhost;Initial Catalog=dbADO;User Id=sa;Password=yourStrong(!)Password;"
+
 
 
 

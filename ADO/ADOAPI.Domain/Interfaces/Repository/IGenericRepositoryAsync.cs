@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-namespace ADOAPI.Persistence.Interface
+
+namespace ADOAPI.Domain.Interfaces.Repository
 {
     public interface IGenericRepositoryAsync<T> where T : class
     {

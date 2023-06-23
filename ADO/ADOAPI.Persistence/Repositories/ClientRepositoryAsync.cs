@@ -1,6 +1,6 @@
 using ADOAPI.Domain.Entities.Customer;
+using ADOAPI.Domain.Interfaces.Repository;
 using ADOAPI.Persistence.Contexts;
-using ADOAPI.Persistence.Interface;
 
 namespace ADOAPI.Persistence.Repositories
 {

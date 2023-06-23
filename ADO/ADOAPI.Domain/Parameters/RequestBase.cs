@@ -1,4 +1,4 @@
-﻿namespace ADOAPI.Application.Parameters
+﻿namespace ADOAPI.Domain.Parameters
 {
     public class RequestBase<T>
     {

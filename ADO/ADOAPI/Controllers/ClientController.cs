@@ -1,4 +1,6 @@
-using ADOAPI.Application.Feature.Queries;
+using ADOAPI.Domain.Interfaces.Repository;
+using ADOAPI.Domain.Parameters;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,14 +11,19 @@ namespace ADOAPI.Controllers
 {
     [Route("api/Clients/[controller]")]
     
-    public class ClientController : BaseApiController
+    public class ClientController : ControllerBase
     {
-        // GET: api/<controller>
-        [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] GetAllClientParameter filter)
-        {
+        private readonly IClientRepositoryAsync _repositoryAsync;
 
-            return Ok(await Mediator.Send(new GetAllClientQuery() { PageSize = filter.PageSize, PageNumber = filter.PageNumber }));
+        public ClientController(IClientRepositoryAsync repositoryAsync)
+        {
+            _repositoryAsync = repositoryAsync;
+        }
+        [HttpGet]
+        public async Task<IActionResult> Get([FromQuery] RequestParameter filter)
+        {
+           var response = await _repositoryAsync.GetPagedResponseAsync(filter.PageNumber, filter.PageSize);
+           return Ok(response);
         }
     }
 }

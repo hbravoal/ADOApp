@@ -1,5 +1,5 @@
+using ADOAPI.Domain.Interfaces.Repository;
 using ADOAPI.Persistence.Contexts;
-using ADOAPI.Persistence.Interface;
 using ADOAPI.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
