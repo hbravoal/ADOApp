@@ -19,40 +19,29 @@ const Login = ({
       <Formik
         validationSchema={LoginByEmailFormSchema}
         initialValues={LoginFormInitialValues}
-        onSubmit={(values, {setSubmitting}) => {
+        onSubmit={values => {
           onHandleSubmit(values);
-          setSubmitting(false);
         }}>
-        {({
-          values,
-          errors,
-          touched,
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          isSubmitting,
-          /* and other goodies */
-        }) => (
-          <form onSubmit={handleSubmit}>
+        {props => (
+          <form onSubmit={props.handleSubmit}>
             <input
-              type="email"
+              type="text"
+              onChange={props.handleChange}
+              onBlur={props.handleBlur}
+              value={props.values.email}
               name="email"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.email}
             />
-            {errors.email && touched.email && errors.email}
             <input
               type="password"
+              onChange={props.handleChange}
+              onBlur={props.handleBlur}
+              value={props.values.password}
               name="password"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.password}
             />
-            {errors.password && touched.password && errors.password}
-            <button type="submit" disabled={isSubmitting}>
-              Submit
-            </button>
+            {props.errors.email && (
+              <div id="feedback">{props.errors.email}</div>
+            )}
+            <button type="submit">Submit</button>
           </form>
         )}
       </Formik>

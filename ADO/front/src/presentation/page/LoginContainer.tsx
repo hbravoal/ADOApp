@@ -2,7 +2,9 @@ import React, {useEffect} from 'react';
 import Login from '../components/Login';
 const LoginContainer = () => {
   const onHandleResetErrors = () => {};
-  const onHandleSubmit = () => {};
+  const onHandleSubmit = (params: any) => {
+    console.log(params);
+  };
   return (
     <Login
       onHandleResetErrors={onHandleResetErrors}
