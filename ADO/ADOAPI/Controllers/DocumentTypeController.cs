@@ -2,7 +2,7 @@ using ADOAPI.Domain.Entities.Customer;
 using ADOAPI.Domain.Interfaces.Repository;
 using ADOAPI.Domain.Parameters;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.AspNetCore.Authorization;
 namespace ADOAPI.Controllers
 {
     [Route("api/Clients/[controller]")]
@@ -22,9 +22,10 @@ namespace ADOAPI.Controllers
            return Ok(response);
         }
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Get(int id)
         {
-            if (id != default)
+            if (id == default)
             {
                 return NotFound();
             }
@@ -54,7 +55,7 @@ namespace ADOAPI.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var item = await _repositoryAsync.GetByIdAsync(id);
-            if (item.Id != default)
+            if (id == default)
             {
                 return NotFound();
             }

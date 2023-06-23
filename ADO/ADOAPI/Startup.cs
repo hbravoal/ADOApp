@@ -1,4 +1,5 @@
 using ADOAPI.Application;
+using ADOAPI.Extensions;
 using ADOAPI.Identity;
 using ADOAPI.Persistence;
 
@@ -19,10 +20,9 @@ namespace ADOAPI
             services.AddIdentityInfrastructure(_config);
             services.AddPersistenceInfrastructure(_config);
             services.AddApplicationLayer();
-            
             services.AddControllers();
+            services.AddSwaggerExtension();
             services.AddHealthChecks();
-
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

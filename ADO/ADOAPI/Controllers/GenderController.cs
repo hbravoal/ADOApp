@@ -27,7 +27,7 @@ namespace ADOAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> Get(int id)
         {
-            if (id != default)
+            if (id == default)
             {
                 return NotFound();
             }
@@ -67,7 +67,7 @@ namespace ADOAPI.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var item = await _repositoryAsync.GetByIdAsync(id);
-            if (item.Id != default)
+            if (item.Id == default)
             {
                 return NotFound();
             }
