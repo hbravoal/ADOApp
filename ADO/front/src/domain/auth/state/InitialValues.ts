@@ -1,8 +1,9 @@
 /**
- * Type for Login redux
+ * Type for Login
  */
 export interface LoginByMailForm {
   email: string;
+  password: string;
 }
 
 /**
@@ -10,4 +11,5 @@ export interface LoginByMailForm {
  */
 export const LoginFormInitialValues: LoginByMailForm = {
   email: '',
+  password: '',
 };
