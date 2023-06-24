@@ -2,10 +2,7 @@ import 'reflect-metadata';
 import {container} from 'tsyringe';
 
 import {ILogInApplication} from '../../domain/interfaces/application/auth/ILogInApplication';
-import {
-  ILogInInfrastructure,
-  ILogOutInfrastructure,
-} from '../../domain/interfaces/infrastructure/auth';
+import {ILogInInfrastructure} from '../../domain/interfaces/infrastructure/auth';
 import {IStorageInfrastructure} from '../../domain/interfaces/infrastructure/storage';
 import {TResponse} from '../../domain/TResponse';
 import {LogInResponse} from '../../domain/auth/dtos/LogInResponse';
@@ -29,7 +26,7 @@ export class LogInApplication implements ILogInApplication {
     );
   }
 
-  public async LogIn(email: string, password: string): Promise<void> {
+  public async LogIn(email: string, password: string): Promise<boolean> {
     let response: TResponse<LogInResponse, ErrorLogInCodes> =
       await this._infrastructure.LogIn(email, password);
     if (response?.succeeded && response.data) {
@@ -37,5 +34,6 @@ export class LogInApplication implements ILogInApplication {
     } else {
       throw new UnauthorizeError('Not found error');
     }
+    return true;
   }
 }

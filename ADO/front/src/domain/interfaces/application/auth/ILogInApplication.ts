@@ -9,5 +9,5 @@ export interface ILogInApplication {
   /**
    * Login user .
    */
-  LogIn: (email: string, password: string) => Promise<void>;
+  LogIn: (email: string, password: string) => Promise<boolean>;
 }
