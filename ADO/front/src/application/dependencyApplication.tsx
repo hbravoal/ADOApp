@@ -1,18 +1,24 @@
 import 'reflect-metadata';
 import {container} from 'tsyringe';
 import {LogInApplication} from './auth';
-import {GetAllClientApplication} from './client';
-import {CreateClientApplication} from './client/CreateClientApplication';
+import {
+  GetAllApplication,
+  CreateApplication,
+  UpdateApplication,
+} from './client';
 
 export const DependencyInjectionApplication = (): void => {
   container.register('ILogInApplication', {
     useClass: LogInApplication,
   });
   container.register('IGetAllClientApplication', {
-    useClass: GetAllClientApplication,
+    useClass: GetAllApplication,
   });
   container.register('ICreateClientApplication', {
-    useClass: CreateClientApplication,
+    useClass: CreateApplication,
+  });
+  container.register('IUpdateClientApplication', {
+    useClass: UpdateApplication,
   });
 };
 

@@ -1,6 +1,5 @@
 import {ClientResponse} from '../../../client/dtos';
-import {ICreateClientApplication} from './ICreateClientApplication';
 
-export interface IGetAllClientApplication {
+export interface IGetAllApplication {
   GetAll: (pageNumber: number, pageSize: number) => Promise<ClientResponse[]>;
 }

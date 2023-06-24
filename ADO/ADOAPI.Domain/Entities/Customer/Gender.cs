@@ -10,8 +10,6 @@ namespace ADOAPI.Domain.Entities.Customer
     public class Gender : AuditableBaseEntity
     {
         public string Description { get; set; }
-        
-  
     }
 }
 

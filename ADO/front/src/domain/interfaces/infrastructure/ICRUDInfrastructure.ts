@@ -19,5 +19,5 @@ export interface ICreateInfrastructure<T> {
   Post: (obj: any, path: string) => Promise<T>;
 }
 export interface IUpdateInfrastructure<T> {
-  Update: (obj: T, path: string) => Promise<T>;
+  Update: (obj: any, path: string) => Promise<T>;
 }

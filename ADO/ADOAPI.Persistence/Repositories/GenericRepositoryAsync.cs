@@ -95,17 +95,9 @@ namespace ADOAPI.Persistence.Repositories
 
         public async Task<T> AddAsync(T entity)
         {
-            try
-            {
-                await _dbContext.Set<T>().AddAsync(entity);
-                await _dbContext.SaveChangesAsync();
-                return entity;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+            await _dbContext.Set<T>().AddAsync(entity);
+            await _dbContext.SaveChangesAsync();
+            return entity;
         }
 
         public async Task UpdateAsync(T entity)

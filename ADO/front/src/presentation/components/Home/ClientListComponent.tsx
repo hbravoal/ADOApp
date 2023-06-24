@@ -23,20 +23,49 @@ import {
   Tooltip,
 } from '@mui/material';
 import {Delete, Edit} from '@mui/icons-material';
-import {IGetAllClientApplication} from '../../../domain/interfaces/application/client';
+import {
+  IGetAllApplication,
+  ICreateApplication,
+} from '../../../domain/interfaces/application/client';
 import {ClientResponse} from '../../../domain/client/dtos';
-import {ICreateClientApplication} from '../../../domain/interfaces/application/client/ICreateClientApplication';
 import {CreateClientRequest} from '../../../domain/client/dtos/CreateClientRequest';
+import {
+  DocumentTypeResponse,
+  GenderResponse,
+} from '../../../domain/client/dtos/ClientResponse';
 
 const ClientListComponent = () => {
-  const _getClients = container.resolve<IGetAllClientApplication>(
+  const _getClients = container.resolve<IGetAllApplication>(
     'IGetAllClientApplication',
   );
-  const _post = container.resolve<ICreateClientApplication>(
+  const _post = container.resolve<ICreateApplication>(
     'ICreateClientApplication',
   );
   const [createModalOpen, setCreateModalOpen] = useState(false);
   const [resfresh, setRefresh] = useState(false);
+  const [genders, setGenders] = useState<GenderResponse[]>([
+    {
+      description: 'Male',
+      id: 1,
+      created: '2023-06-23T18:49:54.087473',
+      lastModified: null,
+      active: true,
+    },
+  ]);
+  const [documentTypes, setDocumentTypes] = useState<DocumentTypeResponse[]>([
+    {
+      description: 'Identification',
+      id: 1,
+      created: '2023-06-23T18:49:54.087473',
+      active: true,
+    },
+    {
+      description: '',
+      id: 0,
+      created: '2023-06-23T18:49:54.087473',
+      active: true,
+    },
+  ]);
   const [tableData, setTableData] = useState<ClientResponse[]>([]);
   const [validationErrors, setValidationErrors] = useState<{
     [cellId: string]: string;
@@ -57,6 +86,7 @@ const ClientListComponent = () => {
 
   const handleSaveRowEdits: MaterialReactTableProps<ClientResponse>['onEditingRowSave'] =
     async ({exitEditingMode, row, values}) => {
+      console.log('text', row, values);
       if (!Object.keys(validationErrors).length) {
         tableData[row.index] = values;
         //send/receive api updates here, then refetch or update local table data for re-render
@@ -111,11 +141,15 @@ const ClientListComponent = () => {
         onBlur: event => {
           // const isValid = true;
           const isValid =
-            cell.column.id === 'documentTypeId'
+            cell.column.id === 'identification'
               ? validateRequired(event.target.value)
-              : cell.column.id === 'genderId'
+              : cell.column.id === 'name'
               ? validateRequired(event.target.value)
-              : validateRequired(event.target.value);
+              : cell.column.id === 'lastName'
+              ? validateRequired(event.target.value)
+              : cell.column.id === 'documentTypeId'
+              ? validateRequired(event.target.value)
+              : true;
           if (!isValid) {
             //set validation error for cell if invalid
             setValidationErrors({
@@ -137,18 +171,18 @@ const ClientListComponent = () => {
 
   const columns = useMemo<MRT_ColumnDef<ClientResponse>[]>(
     () => [
-      // {
-      //   accessorKey: 'id',
-      //   header: 'ID',
-      //   enableColumnOrdering: false,
-      //   enableEditing: false, //disable editing on this column
-      //   enableSorting: false,
-      //   size: 80,
-      //   enableHiding: false, // Still displayed but at least disabled
-      //   enableColumnFilter: false,
-      //   enableGlobalFilter: false,
-      //   enableColumnFilterModes: false,
-      // },
+      {
+        accessorKey: 'id',
+        header: 'ID',
+        enableColumnOrdering: false,
+        enableEditing: false, //disable editing on this column
+        enableSorting: false,
+        size: 80,
+        enableHiding: false, // Still displayed but at least disabled
+        enableColumnFilter: false,
+        enableGlobalFilter: false,
+        enableColumnFilterModes: false,
+      },
       {
         accessorKey: 'identification',
         header: 'Identification',
@@ -160,10 +194,19 @@ const ClientListComponent = () => {
       {
         accessorKey: 'documentType.description',
         header: 'Identification type',
+        editSelectOptions: ['1', '2'],
         id: 'documentTypeId',
         size: 140,
-        muiTableBodyCellEditTextFieldProps: ({cell}) => ({
-          ...getCommonEditTextFieldProps(cell),
+        muiTableBodyCellEditTextFieldProps: ({cell, row}) => ({
+          select: true, //change to select for a dropdown
+          children: documentTypes.map((item: DocumentTypeResponse) => (
+            <MenuItem
+              key={item.id}
+              value={item.description}
+              id={item.id.toString()}>
+              {item.description}
+            </MenuItem>
+          )),
         }),
       },
       {
@@ -186,8 +229,16 @@ const ClientListComponent = () => {
         header: 'Gender',
         size: 80,
         id: 'genderId',
-        muiTableBodyCellEditTextFieldProps: ({cell}) => ({
-          ...getCommonEditTextFieldProps(cell),
+        muiTableBodyCellEditTextFieldProps: ({cell, row}) => ({
+          select: true, //change to select for a dropdown
+          children: genders.map((gender: GenderResponse) => (
+            <MenuItem
+              key={gender.id}
+              value={gender.description}
+              id={gender.id.toString()}>
+              {gender.description}
+            </MenuItem>
+          )),
         }),
       },
     ],
@@ -314,6 +365,14 @@ export const CreateNewAccountModal = ({
                   <MenuItem value={1}>Male</MenuItem>
                   <MenuItem value={2}>Female</MenuItem>
                 </Select>
+              ) : column.id === 'id' ? (
+                <TextField
+                  key={column.accessorKey}
+                  label={column.header}
+                  name={column.accessorKey}
+                  value={0}
+                  disabled={true}
+                />
               ) : (
                 <TextField
                   key={column.accessorKey}

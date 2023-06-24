@@ -16,7 +16,7 @@ export interface GenderResponse {
   description: string;
   id: number;
   created: string;
-  lastModified: any;
+  lastModified?: any;
   active: boolean;
 }
 
@@ -24,6 +24,6 @@ export interface DocumentTypeResponse {
   description: string;
   id: number;
   created: string;
-  lastModified: string;
+  lastModified?: string;
   active: boolean;
 }
