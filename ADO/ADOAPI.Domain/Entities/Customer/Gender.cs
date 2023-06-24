@@ -11,8 +11,7 @@ namespace ADOAPI.Domain.Entities.Customer
     {
         public string Description { get; set; }
         
-        [JsonIgnore]
-        public virtual List<Client> Clients{ get; set; }
+  
     }
 }
 

@@ -1,0 +1,1 @@
+export {CRUDInfrastructure} from './CRUDInfrastructure';

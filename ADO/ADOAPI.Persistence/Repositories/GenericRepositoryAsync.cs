@@ -53,13 +53,36 @@ namespace ADOAPI.Persistence.Repositories
             }
             return queryable;
         }
+        public  IQueryable<T> GetPagedResponseAsync(int pageNumber, int pageSize,params Expression<Func<T, object>>[] includeProperties)
+        {
+            IQueryable<T> queryable =  _dbContext
+                .Set<T>()
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .AsNoTracking();
+                
+            foreach (Expression<Func<T, object>> includeProperty in includeProperties)
+            {
+                queryable = queryable.Include<T, object>(includeProperty);
+            }
+            return queryable;
+        }
 
 
+        public   IQueryable<T> GetById(Expression<Func<T, bool>> match,params Expression<Func<T, object>>[] includeProperties)
+        {
+            var query = _dbContext.Set<T>()  .Where(match).AsQueryable();
+
+            foreach (var prop in includeProperties)
+            {
+                query = query.Include(prop);
+            }
+            return query;
+        }
         public virtual async Task<T> GetByIdAsync(int id)
         {
             return await _dbContext.Set<T>().FindAsync(id);
         }
-
         public async Task<IReadOnlyList<T>> GetPagedResponseAsync(int pageNumber, int pageSize)
         {
             return await _dbContext
@@ -72,9 +95,17 @@ namespace ADOAPI.Persistence.Repositories
 
         public async Task<T> AddAsync(T entity)
         {
-            await _dbContext.Set<T>().AddAsync(entity);
-            await _dbContext.SaveChangesAsync();
-            return entity;
+            try
+            {
+                await _dbContext.Set<T>().AddAsync(entity);
+                await _dbContext.SaveChangesAsync();
+                return entity;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
         public async Task UpdateAsync(T entity)
@@ -83,9 +114,10 @@ namespace ADOAPI.Persistence.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(T entity)
+        public async Task DeleteAsync(T entity) 
         {
-            _dbContext.Set<T>().Remove(entity);
+            entity.GetType().GetProperty("Active")?.SetValue(entity, false);
+            _dbContext.Entry(entity).State = EntityState.Modified;
             await _dbContext.SaveChangesAsync();
         }
 

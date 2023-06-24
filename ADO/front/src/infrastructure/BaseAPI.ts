@@ -91,4 +91,53 @@ export default abstract class BaseAPI {
       }
     }
   }
+
+  public async put<T>(
+    url: string,
+    dataObject?: any,
+    params?: any,
+    headers?: any,
+  ): Promise<any> {
+    try {
+      const {data} = await axios.put<T>(`${this.baseUrl}${url}`, dataObject, {
+        params,
+        headers,
+      });
+      return data;
+    } catch (error) {
+      console.log(error);
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 401) {
+          throw new UnauthorizeError(error.stack);
+        }
+        throw new NetworkError(error.stack);
+      } else {
+        throw new GeneralError();
+      }
+    }
+  }
+  public async delete(
+    url: string,
+    dataObject?: any,
+    params?: any,
+    headers?: any,
+  ): Promise<any> {
+    try {
+      const {data} = await axios.delete(`${this.baseUrl}${url}`, {
+        params,
+        headers,
+      });
+      return data;
+    } catch (error) {
+      console.log(error);
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 401) {
+          throw new UnauthorizeError(error.stack);
+        }
+        throw new NetworkError(error.stack);
+      } else {
+        throw new GeneralError();
+      }
+    }
+  }
 }

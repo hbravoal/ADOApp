@@ -1,0 +1,1 @@
+export {IGetAllClientApplication} from './IGetAllClientApplication';

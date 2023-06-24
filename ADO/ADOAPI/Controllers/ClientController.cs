@@ -21,26 +21,45 @@ namespace ADOAPI.Controllers
             _repositoryAsync = repositoryAsync;
         }
         [HttpGet("GetAll")]
-        public async Task<IActionResult> GetAll([FromQuery] RequestParameter filter)
+        public IActionResult GetAll([FromQuery] RequestParameter filter)
         {
-           var response = await _repositoryAsync.GetPagedResponseAsync(filter.PageNumber, filter.PageSize);
+           var response =  _repositoryAsync.GetPagedResponseAsync(filter.PageNumber, filter.PageSize,
+                   item=>item.Active,x => x.DocumentType, /*<= Single property */ 
+                   x => x.Gender
+               
+               );
            return Ok(response);
         }
         [HttpGet]
-        public async Task<IActionResult> Get(int id)
+        public  IActionResult Get(int id)
         {
             if (id != default)
             {
                 return NotFound();
             }
-            var item = await _repositoryAsync.GetByIdAsync(id);
+            var item =  _repositoryAsync.GetById(d=>d.Id==id,
+                item=>item.Active,x => x.DocumentType /*<= Single property */ 
+
+                );
             return Ok(item);
         }
 
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Client model)
         {
-            return Ok(await _repositoryAsync.AddAsync(model));
+            
+            var response = await _repositoryAsync.AddAsync(model);
+            if (response?.Id is not null)
+            {
+                var item =  _repositoryAsync.GetById(d=>d.Id==response.Id,
+                    item=>item.Gender,x => x.DocumentType /*<= Single property */ 
+
+                );
+                return Ok(item);  
+            }
+
+            return Ok();
+
         }
 
         [HttpPut("{id}")]
@@ -59,11 +78,13 @@ namespace ADOAPI.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var item = await _repositoryAsync.GetByIdAsync(id);
-            if (item.Id != default)
+            if (item.Id == default)
             {
                 return NotFound();
             }
-            return Ok( _repositoryAsync.DeleteAsync(item));
+
+            await _repositoryAsync.DeleteAsync(item);
+            return Ok( );
         }
     }
 }

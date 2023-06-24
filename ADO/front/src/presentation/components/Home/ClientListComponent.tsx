@@ -1,4 +1,6 @@
-import React, {useCallback, useMemo, useState} from 'react';
+import 'reflect-metadata';
+import {container} from 'tsyringe';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {
   MaterialReactTable,
   type MaterialReactTableProps,
@@ -17,33 +19,43 @@ import {
   MenuItem,
   Stack,
   TextField,
+  Select,
   Tooltip,
 } from '@mui/material';
 import {Delete, Edit} from '@mui/icons-material';
-import {data, states} from './makeData';
-
-export type Person = {
-  id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  age: number;
-  state: string;
-};
+import {IGetAllClientApplication} from '../../../domain/interfaces/application/client';
+import {ClientResponse} from '../../../domain/client/dtos';
+import {ICreateClientApplication} from '../../../domain/interfaces/application/client/ICreateClientApplication';
+import {CreateClientRequest} from '../../../domain/client/dtos/CreateClientRequest';
 
 const ClientListComponent = () => {
+  const _getClients = container.resolve<IGetAllClientApplication>(
+    'IGetAllClientApplication',
+  );
+  const _post = container.resolve<ICreateClientApplication>(
+    'ICreateClientApplication',
+  );
   const [createModalOpen, setCreateModalOpen] = useState(false);
-  const [tableData, setTableData] = useState<Person[]>(() => data);
+  const [resfresh, setRefresh] = useState(false);
+  const [tableData, setTableData] = useState<ClientResponse[]>([]);
   const [validationErrors, setValidationErrors] = useState<{
     [cellId: string]: string;
   }>({});
 
-  const handleCreateNewRow = (values: Person) => {
-    tableData.push(values);
-    setTableData([...tableData]);
+  const handleCreateNewRow = (values: any) => {
+    let request = {} as CreateClientRequest;
+    request.identification = values.identification;
+    request.name = values.name;
+    request.lastName = values.lastName;
+    request.documentTypeId = Number(values.documentTypeId);
+    request.genderId = Number(values.genderId);
+    request.active = true;
+    _post.Create(request).then((item: ClientResponse) => {
+      setRefresh(true);
+    });
   };
 
-  const handleSaveRowEdits: MaterialReactTableProps<Person>['onEditingRowSave'] =
+  const handleSaveRowEdits: MaterialReactTableProps<ClientResponse>['onEditingRowSave'] =
     async ({exitEditingMode, row, values}) => {
       if (!Object.keys(validationErrors).length) {
         tableData[row.index] = values;
@@ -56,9 +68,26 @@ const ClientListComponent = () => {
   const handleCancelRowEdits = () => {
     setValidationErrors({});
   };
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await _getClients.GetAll(1, 100);
+      setTableData(data);
+    };
+    fetchData();
+  }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await _getClients.GetAll(1, 100);
+      setTableData(data);
+    };
+    if (resfresh) {
+      fetchData();
+      setRefresh(false);
+    }
+  }, [resfresh]);
   const handleDeleteRow = useCallback(
-    (row: MRT_Row<Person>) => {
+    (row: MRT_Row<ClientResponse>) => {
       if (
         // eslint-disable-next-line no-restricted-globals
         !confirm(`Are you sure you want to delete ${row.getValue('firstName')}`)
@@ -74,17 +103,18 @@ const ClientListComponent = () => {
 
   const getCommonEditTextFieldProps = useCallback(
     (
-      cell: MRT_Cell<Person>,
-    ): MRT_ColumnDef<Person>['muiTableBodyCellEditTextFieldProps'] => {
+      cell: MRT_Cell<ClientResponse>,
+    ): MRT_ColumnDef<ClientResponse>['muiTableBodyCellEditTextFieldProps'] => {
       return {
         error: !!validationErrors[cell.id],
         helperText: validationErrors[cell.id],
         onBlur: event => {
+          // const isValid = true;
           const isValid =
-            cell.column.id === 'email'
-              ? validateEmail(event.target.value)
-              : cell.column.id === 'age'
-              ? validateAge(+event.target.value)
+            cell.column.id === 'documentTypeId'
+              ? validateRequired(event.target.value)
+              : cell.column.id === 'genderId'
+              ? validateRequired(event.target.value)
               : validateRequired(event.target.value);
           if (!isValid) {
             //set validation error for cell if invalid
@@ -105,18 +135,39 @@ const ClientListComponent = () => {
     [validationErrors],
   );
 
-  const columns = useMemo<MRT_ColumnDef<Person>[]>(
+  const columns = useMemo<MRT_ColumnDef<ClientResponse>[]>(
     () => [
+      // {
+      //   accessorKey: 'id',
+      //   header: 'ID',
+      //   enableColumnOrdering: false,
+      //   enableEditing: false, //disable editing on this column
+      //   enableSorting: false,
+      //   size: 80,
+      //   enableHiding: false, // Still displayed but at least disabled
+      //   enableColumnFilter: false,
+      //   enableGlobalFilter: false,
+      //   enableColumnFilterModes: false,
+      // },
       {
-        accessorKey: 'id',
-        header: 'ID',
-        enableColumnOrdering: false,
-        enableEditing: false, //disable editing on this column
-        enableSorting: false,
-        size: 80,
+        accessorKey: 'identification',
+        header: 'Identification',
+        size: 140,
+        muiTableBodyCellEditTextFieldProps: ({cell}) => ({
+          ...getCommonEditTextFieldProps(cell),
+        }),
       },
       {
-        accessorKey: 'firstName',
+        accessorKey: 'documentType.description',
+        header: 'Identification type',
+        id: 'documentTypeId',
+        size: 140,
+        muiTableBodyCellEditTextFieldProps: ({cell}) => ({
+          ...getCommonEditTextFieldProps(cell),
+        }),
+      },
+      {
+        accessorKey: 'name',
         header: 'First Name',
         size: 140,
         muiTableBodyCellEditTextFieldProps: ({cell}) => ({
@@ -126,39 +177,18 @@ const ClientListComponent = () => {
       {
         accessorKey: 'lastName',
         header: 'Last Name',
-        size: 140,
         muiTableBodyCellEditTextFieldProps: ({cell}) => ({
           ...getCommonEditTextFieldProps(cell),
         }),
       },
       {
-        accessorKey: 'email',
-        header: 'Email',
-        muiTableBodyCellEditTextFieldProps: ({cell}) => ({
-          ...getCommonEditTextFieldProps(cell),
-          type: 'email',
-        }),
-      },
-      {
-        accessorKey: 'age',
-        header: 'Age',
+        accessorKey: 'gender.description',
+        header: 'Gender',
         size: 80,
+        id: 'genderId',
         muiTableBodyCellEditTextFieldProps: ({cell}) => ({
           ...getCommonEditTextFieldProps(cell),
-          type: 'number',
         }),
-      },
-      {
-        accessorKey: 'state',
-        header: 'State',
-        muiTableBodyCellEditTextFieldProps: {
-          select: true, //change to select for a dropdown
-          children: states.map(state => (
-            <MenuItem key={state} value={state}>
-              {state}
-            </MenuItem>
-          )),
-        },
       },
     ],
     [getCommonEditTextFieldProps],
@@ -216,9 +246,9 @@ const ClientListComponent = () => {
 };
 
 interface CreateModalProps {
-  columns: MRT_ColumnDef<Person>[];
+  columns: MRT_ColumnDef<ClientResponse>[];
   onClose: () => void;
-  onSubmit: (values: Person) => void;
+  onSubmit: (values: ClientResponse) => void;
   open: boolean;
 }
 
@@ -229,6 +259,7 @@ export const CreateNewAccountModal = ({
   onClose,
   onSubmit,
 }: CreateModalProps) => {
+  console.log('', columns);
   const [values, setValues] = useState<any>(() =>
     columns.reduce((acc, column) => {
       acc[column.accessorKey ?? ''] = '';
@@ -253,16 +284,50 @@ export const CreateNewAccountModal = ({
               minWidth: {xs: '300px', sm: '360px', md: '400px'},
               gap: '1.5rem',
             }}>
-            {columns.map(column => (
-              <TextField
-                key={column.accessorKey}
-                label={column.header}
-                name={column.accessorKey}
-                onChange={e =>
-                  setValues({...values, [e.target.name]: e.target.value})
-                }
-              />
-            ))}
+            {columns.map(column =>
+              column.id === 'documentTypeId' ? (
+                <Select
+                  labelId="demo-simple-select-label"
+                  name="documentTypeId"
+                  value={values['documentTypeId'] ?? 0}
+                  label="Document Type"
+                  onChange={e => {
+                    setValues({...values, [e.target.name]: e.target.value});
+                  }}>
+                  <MenuItem value={0}>Identification</MenuItem>
+                  <MenuItem value={1}>C'edula de ciudadan'ia</MenuItem>
+                  <MenuItem value={2}>Tarjeta de identidad</MenuItem>
+                </Select>
+              ) : column.id === 'genderId' ? (
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="genderId"
+                  name="genderId"
+                  value={values['genderId'] ?? 0}
+                  label="Gender"
+                  onChange={e => {
+                    console.log(values);
+                    console.log('e', e.target);
+                    setValues({...values, [e.target.name]: e.target.value});
+                  }}>
+                  <MenuItem value={0}>Gender</MenuItem>
+                  <MenuItem value={1}>Male</MenuItem>
+                  <MenuItem value={2}>Female</MenuItem>
+                </Select>
+              ) : (
+                <TextField
+                  key={column.accessorKey}
+                  label={column.header}
+                  name={column.accessorKey}
+                  onChange={e => {
+                    console.log(values);
+                    console.log('e', e.target);
+
+                    setValues({...values, [e.target.name]: e.target.value});
+                  }}
+                />
+              ),
+            )}
           </Stack>
         </form>
       </DialogContent>
