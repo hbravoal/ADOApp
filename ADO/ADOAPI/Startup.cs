@@ -1,6 +1,7 @@
 using ADOAPI.Application;
 using ADOAPI.Extensions;
 using ADOAPI.Identity;
+using ADOAPI.Middlerwares;
 using ADOAPI.Persistence;
 
 namespace ADOAPI
@@ -23,6 +24,7 @@ namespace ADOAPI
             services.AddControllers();
             services.AddSwaggerExtension();
             services.AddHealthChecks();
+            services.AddCors();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -39,9 +41,15 @@ namespace ADOAPI
                 app.UseDeveloperExceptionPage();
 
             }
-
+            app.UseMiddleware<ErrorHandlerMiddleware>();
             app.UseHttpsRedirection();
             app.UseRouting();
+            // global cors policy
+            app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true) // allow any origin
+                .AllowCredentials()); // allow credentials multiple origins separated with comma
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseSwaggerUI(options =>
@@ -55,6 +63,9 @@ namespace ADOAPI
              {
                  endpoints.MapControllers();
              });
+            
+          
+
         }
     }
 }

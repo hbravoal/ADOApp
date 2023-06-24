@@ -31,6 +31,9 @@ const Login = ({
               value={props.values.email}
               name="email"
             />
+            {props.errors.email && (
+              <div id="feedback">{props.errors.email}</div>
+            )}
             <input
               type="password"
               onChange={props.handleChange}
@@ -38,9 +41,10 @@ const Login = ({
               value={props.values.password}
               name="password"
             />
-            {props.errors.email && (
-              <div id="feedback">{props.errors.email}</div>
+            {props.errors.password && (
+              <div id="feedback">{props.errors.password}</div>
             )}
+            {error && <div id="feedback">{error}</div>}
             <button type="submit">Submit</button>
           </form>
         )}

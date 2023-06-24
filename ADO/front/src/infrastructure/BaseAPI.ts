@@ -2,6 +2,7 @@ import axios, {AxiosInstance} from 'axios';
 import {GeneralError} from '../domain/exceptions/GeneralError';
 import {NetworkError} from '../domain/exceptions/NetworkError';
 import {AUTH_CONFIGURATION_PROXY_BASE} from '../domain/types/GeneralConfigurationTypes';
+import {UnauthorizeError} from '../domain/exceptions/UnauthorizeError.';
 
 /* Class that serves as a base for making HTTP requests using the Axios library.
 It defines two methods, `get` and `post`, which make GET and POST requests respectively. The class
@@ -41,9 +42,7 @@ export default abstract class BaseAPI {
       });
       return data;
     } catch (error) {
-      console.log(error);
       if (axios.isAxiosError(error)) {
-        console.log('error axios,', error);
         throw new NetworkError(error.stack);
       } else {
         throw new GeneralError();
@@ -83,7 +82,9 @@ export default abstract class BaseAPI {
     } catch (error) {
       console.log(error);
       if (axios.isAxiosError(error)) {
-        console.log('error axios,', error);
+        if (error.response?.status === 401) {
+          throw new UnauthorizeError(error.stack);
+        }
         throw new NetworkError(error.stack);
       } else {
         throw new GeneralError();

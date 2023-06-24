@@ -3,14 +3,11 @@ import {LogInResponse} from '../../../auth/dtos/LogInResponse';
 import {ErrorLogInCodes} from '../../../auth/enums/ErrorCodeLogIn';
 
 /**
- * [Interface]Log in user infrastructure interface.
+ * [Interface] - Application Log in user
  */
-export interface ILogInInfrastructure {
+export interface ILogInApplication {
   /**
    * Login user .
    */
-  LogIn: (
-    email: string,
-    password: string,
-  ) => Promise<TResponse<LogInResponse, ErrorLogInCodes>>;
+  LogIn: (email: string, password: string) => Promise<void>;
 }

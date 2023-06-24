@@ -1,7 +1,7 @@
 /**
  * Enums errors for LogIn
  */
-export enum ErrorCodeLogIn {
+export enum ErrorLogInCodes {
   /**
    * general Error
    */
