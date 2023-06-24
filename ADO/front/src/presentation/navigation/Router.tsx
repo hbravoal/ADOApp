@@ -12,8 +12,14 @@ import LoginContainer from '../page/LoginContainer';
 const Router = () => {
   return (
     <Routes>
-      <Route path="/" element={<LoginContainer />} />
-      <Route path="/login" element={<LoginContainer />} />
+      <Route
+        path="/"
+        element={IsAuth() ? <Navigate to="/home" /> : <LoginContainer />}
+      />
+      <Route
+        path="/login"
+        element={IsAuth() ? <Navigate to="/home" /> : <LoginContainer />}
+      />
       <Route
         path="/home"
         element={!IsAuth() ? <Navigate to="/login" /> : <DashboardContainer />}
